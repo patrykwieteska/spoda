@@ -13,7 +13,7 @@ public class ParticipantMapper {
         return ParticipantDto.builder()
                 .id(participant.getId())
                 .alias(participant.getAlias())
-                .name(participant.getUserName())
+                .name(participant.getName())
                 .creationDate(participant.getCreationDate())
                 .lastModificationDate(participant.getLastModificationDate())
                 .createdBy(participant.getCreatedBy())
@@ -22,7 +22,7 @@ public class ParticipantMapper {
 
     public Participant mapToEntity(CreateParticipantRequest request) {
         Participant participant = Participant.builder()
-                .userName(request.getName())
+                .name(request.getName())
                 .alias(request.getAlias())
                 .build();
         participant.setCreationDate(LocalDateTime.now());

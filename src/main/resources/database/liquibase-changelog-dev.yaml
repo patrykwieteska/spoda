@@ -1,0 +1,5 @@
+databaseChangeLog:
+  - include:
+      file: database/db.changelog/structure/changelog-1.0.sql
+  - include:
+      file: database/db.changelog/data/changelog-data-1.0.sql

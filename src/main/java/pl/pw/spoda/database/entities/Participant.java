@@ -17,8 +17,8 @@ public class Participant extends BaseEntity {
     @Column(name = "ID", nullable = false, insertable = false, updatable = false)
     private Integer id;
 
-    @Column(name = "USER_NAME")
-    private String userName;
+    @Column(name = "NAME")
+    private String name;
 
     @Column(name = "ALIAS")
     private String alias;
