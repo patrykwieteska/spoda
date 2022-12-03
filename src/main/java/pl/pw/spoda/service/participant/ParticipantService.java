@@ -17,7 +17,7 @@ public class ParticipantService {
     private DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE_TIME;
 
     public ParticipantDto getParticipantByName(String username) {
-        Optional<Participant> storedParticipant = participantRepository.findByUserName(username);
+        Optional<Participant> storedParticipant = participantRepository.findByName(username);
         if (storedParticipant.isEmpty())
             throw new RuntimeException("There is no participant with name " + username);
 
