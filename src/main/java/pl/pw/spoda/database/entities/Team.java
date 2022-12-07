@@ -9,17 +9,19 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString(callSuper = true)
-@Table(name = "PARTICIPANT")
-public class Participant extends BaseEntity {
+@Table(name = "TEAM")
+public class Team extends BaseEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID", nullable = false, insertable = false, updatable = false)
     private Integer id;
-
-    @Column(name = "NAME")
+    @Column(name="NAME", nullable = false)
     private String name;
-
-    @Column(name = "DISPLAY_NAME")
-    private String displayName;
+    @Column(name="RATING", nullable = false)
+    private Integer rating;
+    @Column(name = "LOGO_URL", nullable = false)
+    private String logoUrl;
+    @Column(name = "TYPE", nullable = true)
+    private Integer type;
 }
