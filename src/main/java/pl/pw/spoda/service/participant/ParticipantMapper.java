@@ -5,6 +5,8 @@ import pl.pw.spoda.database.entities.Participant;
 import pl.pw.spoda.dto.ParticipantDto;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ParticipantMapper {
@@ -12,7 +14,7 @@ public class ParticipantMapper {
     public ParticipantDto mapToResponse(Participant participant) {
         return ParticipantDto.builder()
                 .id(participant.getId())
-                .alias(participant.getAlias())
+                .alias(participant.getDisplayName())
                 .name(participant.getName())
                 .creationDate(participant.getCreationDate())
                 .lastModificationDate(participant.getLastModificationDate())
@@ -23,10 +25,16 @@ public class ParticipantMapper {
     public Participant mapToEntity(CreateParticipantRequest request) {
         Participant participant = Participant.builder()
                 .name(request.getName())
-                .alias(request.getAlias())
+                .displayName(request.getDisplayName())
                 .build();
         participant.setCreationDate(LocalDateTime.now());
         participant.setLastModificationDate(LocalDateTime.now());
         return participant;
+    }
+
+    public List<ParticipantDto> mapToResponseList(List<Participant> participants) {
+        return participants.stream()
+                .map( this::mapToResponse )
+                .collect( Collectors.toList());
     }
 }

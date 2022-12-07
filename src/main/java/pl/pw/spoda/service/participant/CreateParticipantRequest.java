@@ -6,5 +6,5 @@ import lombok.Getter;
 public class CreateParticipantRequest {
 
     private String name;
-    private String alias;
+    private String displayName;
 }
