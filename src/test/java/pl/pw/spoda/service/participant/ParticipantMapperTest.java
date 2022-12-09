@@ -45,10 +45,10 @@ public class ParticipantMapperTest {
     @Test
     public void mapToEntityTest() {
         Participant expectedParticipant = Participant.builder()
-                .name( "name_3" )
-                .displayName( "displayName_3" )
+                .name( "name_" )
+                .displayName( "displayName_" )
                 .build();
-        expectedParticipant.setCreatedBy( "createdBy_3" );
+        expectedParticipant.setCreatedBy( "createdBy_" );
         expectedParticipant.setLastModificationDate( LAST_MODIFICATION_DATE );
 
         when( dateService.getCurrentDate() ).thenReturn( LAST_MODIFICATION_DATE );
