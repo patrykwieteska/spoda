@@ -1,20 +1,24 @@
 package pl.pw.spoda.service.participant;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.pw.spoda.database.entities.Participant;
 import pl.pw.spoda.dto.ParticipantDto;
+import pl.pw.spoda.service.DateService;
 
-import java.time.LocalDateTime;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class ParticipantMapper {
+
+    private final DateService dateService;
+
 
     public ParticipantDto mapToResponse(Participant participant) {
         return ParticipantDto.builder()
                 .id(participant.getId())
-                .alias(participant.getDisplayName())
+                .displayName(participant.getDisplayName())
                 .name(participant.getName())
                 .creationDate(participant.getCreationDate())
                 .lastModificationDate(participant.getLastModificationDate())
@@ -27,14 +31,13 @@ public class ParticipantMapper {
                 .name(request.getName())
                 .displayName(request.getDisplayName())
                 .build();
-        participant.setCreationDate(LocalDateTime.now());
-        participant.setLastModificationDate(LocalDateTime.now());
+        participant.setLastModificationDate(dateService.getCurrentDate());
         return participant;
     }
 
-    public List<ParticipantDto> mapToResponseList(List<Participant> participants) {
+    public List<ParticipantDto> mapToParticipantList(List<Participant> participants) {
         return participants.stream()
                 .map( this::mapToResponse )
-                .collect( Collectors.toList());
+                .toList();
     }
 }
