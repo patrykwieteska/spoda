@@ -16,7 +16,7 @@ public class ParticipantDto {
 
     private Integer id;
     private String name;
-    private String alias;
+    private String displayName;
     private LocalDateTime creationDate;
     private LocalDateTime lastModificationDate;
     private String createdBy;
