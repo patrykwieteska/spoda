@@ -2,9 +2,10 @@ package pl.pw.spoda.service.participant;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import pl.pw.spoda.dto.CreateParticipantRequest;
 import pl.pw.spoda.exceptions.ParticipantAlreadyExistsException;
 import pl.pw.spoda.database.entities.Participant;
-import pl.pw.spoda.dto.ParticipantDto;
+import pl.pw.spoda.dto.ParticipantResponse;
 import pl.pw.spoda.exceptions.ParticipantNotFoundException;
 import pl.pw.spoda.repository.ParticipantRepository;
 import pl.pw.spoda.service.DateService;
@@ -31,12 +32,12 @@ public class ParticipantService {
         participantRepository.save( participant );
     }
 
-    public List<ParticipantDto> getParticipants() {
+    public List<ParticipantResponse> getParticipants() {
         List<Participant> participants = participantRepository.findAllParticipants();
         return participantMapper.mapToParticipantList( participants );
     }
 
-    public ParticipantDto getParticipantById(Integer id) {
+    public ParticipantResponse getParticipantById(Integer id) {
         Participant participant = participantRepository.findById( id )
                 .orElseThrow( () -> new ParticipantNotFoundException( id ) );
         return participantMapper.mapToResponse( participant );

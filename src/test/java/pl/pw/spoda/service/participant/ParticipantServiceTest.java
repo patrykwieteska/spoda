@@ -7,7 +7,8 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 import pl.pw.spoda.database.entities.Participant;
-import pl.pw.spoda.dto.ParticipantDto;
+import pl.pw.spoda.dto.CreateParticipantRequest;
+import pl.pw.spoda.dto.ParticipantResponse;
 import pl.pw.spoda.exceptions.ParticipantAlreadyExistsException;
 import pl.pw.spoda.exceptions.ParticipantNotFoundException;
 import pl.pw.spoda.repository.ParticipantRepository;
@@ -59,12 +60,12 @@ public class ParticipantServiceTest {
     public void getParticipantByIdTest() {
 
         Participant participant = new Participant();
-        ParticipantDto participantDto = new ParticipantDto();
+        ParticipantResponse participantResponse = new ParticipantResponse();
 
         when( participantRepository.findById( 1 ) ).thenReturn( Optional.of( participant ) );
-        when( participantMapper.mapToResponse( participant ) ).thenReturn( participantDto );
+        when( participantMapper.mapToResponse( participant ) ).thenReturn( participantResponse );
 
-        assertThat( participantService.getParticipantById( 1 ) ).isEqualTo( participantDto );
+        assertThat( participantService.getParticipantById( 1 ) ).isEqualTo( participantResponse );
         verify( participantMapper, only() ).mapToResponse( participant );
     }
 
@@ -84,12 +85,12 @@ public class ParticipantServiceTest {
     @Test
     public void getParticipantsTest() {
         List<Participant> participantList = List.of( new Participant() );
-        List<ParticipantDto> participantDtoList = List.of( new ParticipantDto() );
+        List<ParticipantResponse> participantResponseList = List.of( new ParticipantResponse() );
 
-        when( participantMapper.mapToParticipantList( participantList ) ).thenReturn( participantDtoList );
+        when( participantMapper.mapToParticipantList( participantList ) ).thenReturn( participantResponseList );
         when( participantRepository.findAllParticipants() ).thenReturn( participantList );
 
-        assertThat( participantService.getParticipants() ).isEqualTo( participantDtoList );
+        assertThat( participantService.getParticipants() ).isEqualTo( participantResponseList );
         verify( participantMapper, only() ).mapToParticipantList( participantList );
     }
 }
