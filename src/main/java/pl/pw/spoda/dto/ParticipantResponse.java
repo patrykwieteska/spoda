@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ParticipantDto {
+public class ParticipantResponse {
 
     private Integer id;
     private String name;

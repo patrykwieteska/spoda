@@ -6,7 +6,8 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.junit.Test;
 import pl.pw.spoda.database.entities.Participant;
-import pl.pw.spoda.dto.ParticipantDto;
+import pl.pw.spoda.dto.CreateParticipantRequest;
+import pl.pw.spoda.dto.ParticipantResponse;
 import pl.pw.spoda.service.DateService;
 
 import java.time.LocalDateTime;
@@ -32,7 +33,7 @@ public class ParticipantMapperTest {
     @Test
     public void mapToResponseTest() {
         assertThat( participantMapper.mapToResponse( stubParticipant( 2 ) ) )
-                .isEqualTo( ParticipantDto.builder()
+                .isEqualTo( ParticipantResponse.builder()
                         .id( 2 )
                         .name( "name_2" )
                         .displayName( "displayName_2" )
@@ -45,10 +46,10 @@ public class ParticipantMapperTest {
     @Test
     public void mapToEntityTest() {
         Participant expectedParticipant = Participant.builder()
-                .name( "name_3" )
-                .displayName( "displayName_3" )
+                .name( "name_" )
+                .displayName( "displayName_" )
                 .build();
-        expectedParticipant.setCreatedBy( "createdBy_3" );
+        expectedParticipant.setCreatedBy( "createdBy_" );
         expectedParticipant.setLastModificationDate( LAST_MODIFICATION_DATE );
 
         when( dateService.getCurrentDate() ).thenReturn( LAST_MODIFICATION_DATE );
@@ -67,7 +68,7 @@ public class ParticipantMapperTest {
 
 
         assertThat( participantMapper.mapToParticipantList( participantList ) ).containsExactlyInAnyOrder(
-                ParticipantDto.builder()
+                ParticipantResponse.builder()
                         .id( 2 )
                         .name( NAME+2 )
                         .displayName( DISPLAY_NAME+2 )
@@ -75,7 +76,7 @@ public class ParticipantMapperTest {
                         .creationDate( CREATION_DATE )
                         .lastModificationDate( LAST_MODIFICATION_DATE )
                         .build(),
-                ParticipantDto.builder()
+                ParticipantResponse.builder()
                         .id( 1)
                         .name( NAME+1 )
                         .displayName( DISPLAY_NAME+1 )

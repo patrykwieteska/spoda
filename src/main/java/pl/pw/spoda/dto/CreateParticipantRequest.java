@@ -1,4 +1,4 @@
-package pl.pw.spoda.service.participant;
+package pl.pw.spoda.dto;
 
 import lombok.Builder;
 import lombok.Getter;
